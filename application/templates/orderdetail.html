@@ -1,0 +1,36 @@
+{% extends 'layout.html'%}
+
+{% block body%}
+<div class='mt-3'>
+<h4>Order no {{ordernumber}} </h4>
+<div class="card mt-3">
+<table class="table">
+    <thead>
+        <tr>
+          <th scope="col">product name</th>
+          <th scope="col">product quantity</th>
+          <th scope="col">product price</th>
+          <th scope="col">sub total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {%for order in orders%}
+    <tr>
+        <td>{{order.productname}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{currencyconvert(order.price)}}</td>
+        <td>{{currencyconvert(order.quantity * order.price)}}</td>
+    </tr>
+    {%endfor%}
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td>{{currencyconvert(total)}}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</div>
+{%endblock%}

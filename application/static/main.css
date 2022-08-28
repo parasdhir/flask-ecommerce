@@ -1,0 +1,17 @@
+body{
+   background-color:whitesmoke;
+}
+
+.registerdiv{
+
+   margin:0 auto;
+}
+
+.cartfont{
+   font-size: 16px;
+}
+
+.cartfont_total{
+   font-size:18px;
+   font-weight: bold;
+}

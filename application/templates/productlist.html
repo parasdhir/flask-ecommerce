@@ -1,0 +1,13 @@
+{% extends 'layout.html'%}
+
+{% block body%}
+<div class="mt-3 list-group">
+{%for product in products%}
+<a class="list-group-item list-group-item-action" href="{{url_for('product_update',productid = product.id)}}">
+
+<h3>{{product.id}} {{product.productname}}</h3>
+
+</a>
+{%endfor%}
+</div>
+{%endblock%}

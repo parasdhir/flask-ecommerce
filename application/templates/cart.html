@@ -1,0 +1,77 @@
+{% extends 'layout.html'%}
+
+{% block body%}
+
+<div class="mt-3">
+  {% if carts %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">product image</th>
+        <th scope="col">product name</th>
+        <th scope="col">quantity</th>
+        <th scope="col">price</th>
+        <th scope="col"></th>
+        <th scope="col">subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for cart in carts%}
+      <tr>
+        <td><img height="100px" src="{{url_for('static',filename='product_img/'+ cart.product_image)}}" alt="product_img"></td>
+        <td><p class='cartfont'>{{cart.productname}}</p></td>
+        <td>
+          <p class='cartfont'>
+            <a class="mr-2" style="vertical-align: middle;" href="/decrementquantity?product_id={{cart.product_id}}">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </a>
+            {{cart.quantity}}
+            <a class="ml-2" style=" vertical-align: middle;"  href="/incrementquantity?product_id={{cart.product_id}}">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              </svg>
+            </a>
+          </p>
+        </td>
+
+        <td><p class='cartfont'>{{currencyconvert(cart.price)}}</p></td>
+        <td><a style=" vertical-align: middle;" href="/deletefromcart?product_id={{cart.product_id}}">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+        </svg>
+      </a> </td>
+        <td><p class='cartfont'>{{currencyconvert(cart.quantity * cart.price)}}</p></td>
+      </tr>
+      {%endfor%}
+      <tr>
+        <td><p class='cartfont_total'>Total</p></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+        <td><p class='cartfont_total'>{{currencyconvert(total)}}</p></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+        <td><a class="btn btn-secondary" href="{{url_for('checkout')}}">checkout</a></td>
+      </tr>
+    </tbody>
+  </table>
+  {% else %}
+  <h2 class="text-center">no item in the cart</h2>
+  {% endif %}
+  
+</div>
+
+{%endblock%}
